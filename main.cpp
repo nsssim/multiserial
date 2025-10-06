@@ -201,7 +201,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
                 for(int i = 0; i < 10; i++) {
                     hWndColorBtns[i] = CreateWindowEx(0, L"BUTTON", L"",
                         WS_CHILD | WS_VISIBLE | BS_OWNERDRAW,
-                        150 + i * 42, 0, 40, 40, hwnd, (HMENU)(10 + i), GetModuleHandle(NULL), NULL);
+                        150 + i * 42, 0, 40, 40, hwnd, reinterpret_cast<HMENU>(10 + i), GetModuleHandle(NULL), NULL);
                 }
                 // Load play and stop icons
                 hPlayIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(2004));
@@ -245,25 +245,25 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
                 ti.uFlags = TTF_IDISHWND | TTF_SUBCLASS;
                 ti.hwnd = hwnd;
                 ti.uId = (UINT_PTR)hWndButton;
-                ti.lpszText = L"Refresh Ports";
+                ti.lpszText = const_cast<LPWSTR>(L"Refresh Ports");
                 SendMessage(hWndTooltip, TTM_ADDTOOL, 0, (LPARAM)&ti);
                 ti.uId = (UINT_PTR)hWndStopBtn;
-                ti.lpszText = L"Stop/Start Listening";
+                ti.lpszText = const_cast<LPWSTR>(L"Stop/Start Listening");
                 SendMessage(hWndTooltip, TTM_ADDTOOL, 0, (LPARAM)&ti);
                 ti.uId = (UINT_PTR)hWndExportBtn;
-                ti.lpszText = L"Export to HTML";
+                ti.lpszText = const_cast<LPWSTR>(L"Export to HTML");
                 SendMessage(hWndTooltip, TTM_ADDTOOL, 0, (LPARAM)&ti);
                 ti.uId = (UINT_PTR)hWndClearBtn;
-                ti.lpszText = L"Clear Display";
+                ti.lpszText = const_cast<LPWSTR>(L"Clear Display");
                 SendMessage(hWndTooltip, TTM_ADDTOOL, 0, (LPARAM)&ti);
                 ti.uId = (UINT_PTR)hWndPauseBtn;
-                ti.lpszText = L"Pause/Resume Scroll";
+                ti.lpszText = const_cast<LPWSTR>(L"Pause/Resume Scroll");
                 SendMessage(hWndTooltip, TTM_ADDTOOL, 0, (LPARAM)&ti);
                 ti.uId = (UINT_PTR)hWndBaudCombo;
-                ti.lpszText = L"Select Baud Rate";
+                ti.lpszText = const_cast<LPWSTR>(L"Select Baud Rate");
                 SendMessage(hWndTooltip, TTM_ADDTOOL, 0, (LPARAM)&ti);
                 ti.uId = (UINT_PTR)hWndCombo;
-                ti.lpszText = L"Select Serial Port";
+                ti.lpszText = const_cast<LPWSTR>(L"Select Serial Port");
                 SendMessage(hWndTooltip, TTM_ADDTOOL, 0, (LPARAM)&ti);
                 // Create status bar
                 hWndStatusBar = CreateWindowEx(0, STATUSCLASSNAME, NULL,
@@ -273,7 +273,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
                 for(int i = 0; i < 10; i++) {
                     ti.uId = (UINT_PTR)hWndColorBtns[i];
                     std::wstring colorText = L"Color " + std::to_wstring(i + 1);
-                    ti.lpszText = (LPWSTR)colorText.c_str();
+                    ti.lpszText = const_cast<LPWSTR>(colorText.c_str());
                     SendMessage(hWndTooltip, TTM_ADDTOOL, 0, (LPARAM)&ti);
                 }
             }
