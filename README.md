@@ -14,6 +14,10 @@ A Windows-based GUI application for monitoring multiple serial ports simultaneou
 - **Refresh Ports**: Dynamically refresh available serial ports
 - **Status Bar**: Shows current monitoring status and port count
 
+## Screenshot
+
+![Multi Serial Monitor](https://raw.githubusercontent.com/nsssim/multiserial/refs/heads/main/screenshot.jpg)
+
 ## Requirements
 
 - Windows operating system
