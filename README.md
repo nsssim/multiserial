@@ -22,14 +22,32 @@ A Windows-based GUI application for monitoring multiple serial ports simultaneou
 
 ## Building
 
-1. Ensure you have MinGW-w64 installed and in your PATH
+### Prerequisites
+- MinGW-w64 GCC compiler
+- Windows SDK (for resource compilation with windres)
+
+### Using Makefile
+1. Ensure MinGW-w64 is installed and in your PATH
 2. Run `make` in the project directory:
 
 ```bash
 make
 ```
 
-This will compile the resource file and link the executable.
+This compiles the resource file (`SerialMonitor.rc`) and links the executable (`SerialMonitor.exe`).
+
+### Manual Compilation
+If you prefer manual compilation:
+
+1. Compile the resource file:
+```bash
+windres SerialMonitor.rc -o SerialMonitor_res.o
+```
+
+2. Compile and link the main program:
+```bash
+g++ -o SerialMonitor.exe main.cpp SerialMonitor_res.o -mwindows -lcomctl32 -lriched20 -lgdi32 -luser32 -lkernel32 -ladvapi32
+```
 
 ## Usage
 
